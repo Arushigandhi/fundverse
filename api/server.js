@@ -1,13 +1,23 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 
-const PORT = process.env.PORT || 8080;
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:8081",
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(cors());
 
-const router = require("./routes/router.js");
-app.use("/api", router);
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to our DBMS lab mini project." });
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
