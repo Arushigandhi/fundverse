@@ -1,0 +1,94 @@
+.outerContainer {
+  background-color: #fbf8f6;
+  height: 100vh;
+  .rightContainer {
+    border-top-left-radius: 65px;
+    background-color: white;
+    // box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 1.625rem 0.25rem 2.9375rem #c8c8c8;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    :global {
+      .ant-form {
+        width: 40rem;
+      }
+      .ant-form-item-label {
+        label {
+          font-size: 1rem;
+          font-weight: 400;
+        }
+      }
+      .ant-form-item-control-input-content {
+        input {
+          border-radius: 12px;
+          height: 3.2rem;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+        textarea {
+          border-radius: 12px;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+        .ant-btn {
+          border-radius: 12px;
+          height: 3.2rem;
+          font-size: 1rem;
+          font-weight: 400;
+          width: 100%;
+        }
+      }
+      .ant-upload.ant-upload-select {
+        width: 100%;
+      }
+
+      .ant-select-selector {
+        border-radius: 12px;
+        height: 3.2rem;
+        font-size: 1rem;
+        font-weight: 400;
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .btnWrapper {
+      margin-top: 4rem;
+      width: 100%;
+      justify-content: end;
+      .continueBtn {
+        border-color: #029441;
+        background-color: #029441;
+        color: white;
+        height: 3.2rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 10px;
+        width: 8rem;
+        float: right !important;
+      }
+    }
+  }
+  .leftContainer {
+    padding-left: 3rem;
+    padding-top: 3rem;
+    h1 {
+      padding-top: 10rem;
+    }
+    p {
+      color: grey;
+    }
+  }
+}
+
+.uploadButton {
+  border-radius: 12px;
+  height: 3.2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  background-color: transparent;
+  border: 1px dashed rgb(186, 186, 186);
+}

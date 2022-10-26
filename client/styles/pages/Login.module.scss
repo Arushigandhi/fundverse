@@ -1,0 +1,56 @@
+.controller {
+  background-color: #fbf8f6;
+  height: 100vh;
+  .loginNav {
+    .img {
+      cursor: pointer;
+    }
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    height: 5rem;
+    // box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 1.625rem 0.25rem 2.9375rem #c8c8c8;
+
+    p {
+      margin-bottom: 0;
+      color: grey;
+      span {
+        color: #029441 !important;
+        text-decoration: underline;
+        a {
+          color: #029441 !important;
+        }
+      }
+    }
+  }
+  .card {
+    width: 38rem;
+    margin: auto;
+    margin-top: 8rem;
+    background: #ffffff;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    :global {
+      .ant-card-head-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-align: center;
+      }
+      .ant-card-body {
+        padding: 5rem 8rem;
+      }
+      .ant-btn {
+        border-color: #029441;
+        background-color: transparent;
+        background: none;
+        color: #029441;
+        height: 2.7rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 2.5rem;
+      }
+    }
+  }
+}

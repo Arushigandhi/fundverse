@@ -1,0 +1,46 @@
+.navContainer {
+  align-items: center;
+  padding: 2rem 1.2rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  z-index: 100;
+  height: 2rem;
+  width: 60%;
+  background-color: white;
+  margin: auto;
+  border-radius: 40px;
+  margin-top: 1.5rem;
+
+  :global {
+    .ant-input-group-wrapper {
+      width: 30%;
+    }
+    .ant-input-group > .ant-input:first-child,
+    .ant-input-group-addon:first-child {
+      border-top-left-radius: 40px;
+      border-bottom-left-radius: 40px;
+    }
+    .ant-input-search
+      > .ant-input-group
+      > .ant-input-group-addon:last-child
+      .ant-input-search-button:not(.ant-btn-primary) {
+      border-top-right-radius: 40px;
+      border-bottom-right-radius: 40px;
+      border-left: none;
+    }
+  }
+
+  .startBtn {
+    border-radius: 40px;
+    color: #029441;
+    border-color: #029441;
+    font-weight: 600;
+  }
+
+  .loginBtn {
+    border: none;
+    margin-right: 1.5rem;
+  }
+}
