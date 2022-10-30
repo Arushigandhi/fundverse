@@ -14,10 +14,10 @@
       margin-bottom: 0;
       color: grey;
       span {
-        color: #029441 !important;
+        color: #02a95c !important;
         text-decoration: underline;
         a {
-          color: #029441 !important;
+          color: #02a95c !important;
         }
       }
     }
@@ -37,8 +37,8 @@
       margin-bottom: 2rem;
     }
     .continueBtn {
-      border-color: #029441;
-      background-color: #029441;
+      border-color: #02a95c;
+      background-color: #02a95c;
       color: white;
       height: 3.4rem;
       font-size: 1rem;
@@ -65,7 +65,7 @@
         width: 22rem;
         margin: 2rem 0;
         h1 {
-          color: #029441;
+          color: #02a95c;
         }
         .tag {
           margin-bottom: 1.5rem;
@@ -73,4 +73,78 @@
       }
     }
   }
+  .infoContainer {
+    width: 60%;
+    margin: auto;
+    h1 {
+      margin-top: 4rem;
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    // .description {
+    //   font-size: 1.2rem;
+    //   font-weight: 400;
+    // }
+    .commentHeading {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 5rem;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    .user {
+      text-decoration: none;
+      color: grey;
+      font-weight: 400;
+    }
+    .card {
+      .donors {
+        color: grey;
+      }
+      .btn {
+        border-color: #02a95c;
+        background-color: #02a95c;
+        color: white;
+        height: 3rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 3px;
+        width: 100%;
+        margin-top: 2rem;
+      }
+    }
+  }
+}
+
+.btnComment {
+  border: 2px solid #02a95c;
+  background-color: transparent;
+  color: #02a95c;
+  height: 2.2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.startBtn {
+  border-radius: 4px;
+  color: #02a95c;
+  border-color: #02a95c;
+  font-weight: 600;
+  width: 100%;
+}
+
+.btn {
+  border-color: #02a95c;
+  background-color: #02a95c;
+  color: white;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 2rem;
 }

@@ -1,27 +1,41 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { Card, Col, Form, Input, Row, Button, message } from "antd";
 import Image from "next/image";
-
 import { useAuth } from "../context/AuthUserContext";
 import Styles from "../styles/pages/Login.module.scss";
 import Link from "next/link";
+import { useMutation } from "react-query";
+import { createUser } from "services/user.service";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
-  const router = useRouter();
 
   const { createUserWithEmailAndPassword } = useAuth();
+
+  const finishMutation = useMutation(createUser, {
+    onSuccess: (data) => {
+      message.success("User created successfully");
+    },
+    onError: (error) => {
+      message.error(error.message);
+    },
+  });
 
   const onSubmit = (event) => {
     if (passwordOne === passwordTwo)
       createUserWithEmailAndPassword(email, passwordOne)
-        .then((authUser) => {
+        .then(async (authUser) => {
+          console.log("authUser", authUser);
           console.log("Success. The user is created in firebase");
-          message.success("Account created successfully");
-          router.push("/dashboard");
+          const data = {
+            id: authUser.user.uid,
+            email: authUser.user.email,
+            name: name,
+          };
+          await finishMutation.mutateAsync(data);
         })
         .catch((error) => {
           console.log(error);
@@ -49,6 +63,22 @@ const SignUp = () => {
         </Row>
         <Card title="Sign Up" className={Styles.card}>
           <Form layout="vertical">
+            <Form.Item
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your name!",
+                },
+              ]}
+            >
+              <Input
+                size="large"
+                placeholder="Full Name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </Form.Item>
             <Form.Item
               name="email"
               rules={[
@@ -101,7 +131,6 @@ const SignUp = () => {
 
             <Form.Item>
               <Button
-                type="primary"
                 htmlType="submit"
                 onClick={onSubmit}
                 className={Styles.loginBtn}

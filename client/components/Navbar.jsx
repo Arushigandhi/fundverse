@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "antd";
 import Styles from "../styles/components/Navbar.module.scss";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -10,7 +11,9 @@ export default function Navbar() {
       <Col className={Styles.navContainer}>
         <Input.Search placeholder="Search" />
         <div className={Styles.img}>
-          <Image src="/logo.png" alt="logo" width={120} height={40} />
+          <Link href="/">
+            <Image src="/logo.png" alt="logo" width={120} height={40} />
+          </Link>
         </div>
         <Col>
           <Button color="primary" className={Styles.loginBtn} href="/login">

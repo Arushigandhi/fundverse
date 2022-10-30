@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthUserContext";
-
-import { Container, Row, Col, Button } from "reactstrap";
+import { Col, Row, Button } from "antd";
 
 const LoggedIn = () => {
   const { authUser, loading, signOut } = useAuth();
@@ -15,7 +14,7 @@ const LoggedIn = () => {
   }, [authUser, loading]);
 
   return (
-    <Container>
+    <div>
       {loading ? (
         <Row>
           <Col>Loading....</Col>
@@ -36,7 +35,7 @@ const LoggedIn = () => {
           </Row>
         </>
       )}
-    </Container>
+    </div>
   );
 };
 

@@ -1,15 +1,4 @@
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Upload,
-  message,
-} from "antd";
+import { Button, Col, Form, Input, Row, Select, message } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Styles from "../styles/pages/Create.module.scss";
@@ -19,58 +8,22 @@ import { useAuth } from "../context/AuthUserContext";
 import { createCampaign } from "services/campaign.service";
 import { useMutation } from "react-query";
 import moment from "moment";
-import { create } from "ipfs-http-client";
-
-// const client = create({
-//   host: "ipfs.infura.io",
-//   port: 5001,
-//   protocol: "https",
-//   headers: {
-//     authorization: auth,
-//   },
-// });
+import { PickerOverlay } from "filestack-react";
+import Link from "next/link";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 export default function createFund() {
-  const client = create("https://ipfs.infura.io:5001/api/v0");
-  // const props = {
-  //   name: "file",
-  //   // action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  //   headers: {
-  //     authorization: "authorization-text",
-  //   },
-  //   onChange(info) {
-  //     console.log(info);
-  //     if (info.file.status === "done") {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === "error") {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
-
-  const [fileUrl, changeFileUrl] = useState(``);
-  async function onChange(e) {
-    const file = e.target.files[0];
-    try {
-      const added = await client.add(file);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      changeFileUrl(url);
-    } catch (error) {
-      console.log("File ain`t uploadin..", error);
-    }
-  }
-
-  function fireUpload() {
-    document.getElementById("image-input").click();
-  }
-
   const { authUser, loading, signOut } = useAuth();
   const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [img, setImg] = useState();
 
-  // Listen for changes on loading and authUser, redirect if needed
+  const open = () => {
+    setShow(true);
+  };
+
   useEffect(() => {
     if (!loading && !authUser) router.push("/login");
   }, [authUser, loading]);
@@ -78,6 +31,7 @@ export default function createFund() {
   const finishMutation = useMutation(createCampaign, {
     onSuccess: (data) => {
       message.success("Campaign created successfully");
+      router.push("/discover");
     },
     onError: (error) => {
       message.error(error.message);
@@ -87,6 +41,7 @@ export default function createFund() {
   const onFinish = async (values) => {
     const data = {
       ...values,
+      image: img,
       currentAmount: 0,
       dateOfCreation: moment(values.dateOfCreation).format("YYYY-MM-DD"),
       numberOfDonors: 0,
@@ -98,7 +53,9 @@ export default function createFund() {
   return (
     <Row className={Styles.outerContainer}>
       <Col span={8} className={Styles.leftContainer}>
-        <Image src="/logo.png" alt="logo" width={120} height={40} />
+        <Link href="/">
+          <Image src="/logo.png" alt="logo" width={120} height={40} />
+        </Link>
         <h1>Let's begin your fundraising journey!</h1>
         <p>We're here to guide you every step of the way.</p>
       </Col>
@@ -113,31 +70,26 @@ export default function createFund() {
           <Form.Item
             name="name"
             label="What would you like your campaign to be called?"
+            rules={[
+              {
+                required: true,
+                message: "Please input campaign's name!",
+              },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item name="description" label="Describe your campaign.">
             <TextArea rows={4} />
           </Form.Item>
-          {/* <Form.Item name="image" label="Please provide an image.">
-            <input
-              type="file"
-              onChange={onChange}
-              id="image-input"
-              className={Styles.imageInput}
-              style={{
-                display: "none",
-              }}
-            />
+          <Form.Item name="image" label="Please provide an image.">
             <button
               className={Styles.uploadButton}
-              onClick={() => {
-                fireUpload();
-              }}
+              onClick={() => setShow(true)}
             >
               Upload
             </button>
-          </Form.Item> */}
+          </Form.Item>
           <Form.Item
             name="goalAmount"
             label="How much would you like to raise?"
@@ -169,10 +121,8 @@ export default function createFund() {
               <Option value="volunteer">Volunteer</Option>
             </Select>
           </Form.Item>
-          {/* <Divider style={{ marginTop: "6rem" }} /> */}
           <Row className={Styles.btnWrapper}>
             <Button
-              type="primary"
               size="large"
               className={Styles.continueBtn}
               htmlType="submit"
@@ -182,6 +132,17 @@ export default function createFund() {
           </Row>
         </Form>
       </Col>
+      {show && (
+        <PickerOverlay
+          apikey={process.env.NEXT_PUBLIC_FILESTACK_API_KEY}
+          onUploadDone={(res) => {
+            setImg(res.filesUploaded[0].url);
+            setShow(false);
+          }}
+        >
+          <div style={{ height: "800px" }} />
+        </PickerOverlay>
+      )}
     </Row>
   );
 }

@@ -82,7 +82,6 @@ export default function Home() {
 
             <Form.Item>
               <Button
-                type="primary"
                 htmlType="submit"
                 onClick={onSubmit}
                 className={Styles.loginBtn}

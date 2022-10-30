@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useQuery } from "react-query";
-import { getAllCampaigns } from "services/campaign.service";
-import Styles from "../styles/pages/Discover.module.scss";
+import { getAllCampaigns, getAllCategories } from "services/campaign.service";
+import Styles from "../../styles/pages/Discover.module.scss";
 
 export default function discover() {
   const allCampaigns = useQuery("allCampaigns", getAllCampaigns);
-  console.log(allCampaigns);
+  const allCategories = useQuery("allCategories", getAllCategories);
+  console.log("allca", allCategories);
 
   return (
     <Col className={Styles.controller}>
@@ -32,7 +33,13 @@ export default function discover() {
             People around the world are raising money for what they are
             passionate about.
           </h3>
-          <Button type="primary" size="large" className={Styles.continueBtn}>
+          <Button
+            size="large"
+            className={Styles.continueBtn}
+            onClick={() => {
+              window.location.href = `/create`;
+            }}
+          >
             Start a campaign
           </Button>
         </Col>
@@ -43,8 +50,12 @@ export default function discover() {
           {allCampaigns &&
             allCampaigns?.data?.map((campaign, idx) => (
               <Card
+                hoverable
                 key={idx}
                 className={Styles.card}
+                onClick={() => {
+                  window.location.href = `/discover/${campaign.id}`;
+                }}
                 // cover={
                 //   <img
                 //     alt="example"
@@ -66,7 +77,11 @@ export default function discover() {
                 </h2>
 
                 <Progress
-                  percent={campaign?.currentAmount / campaign?.goalAmount}
+                  percent={
+                    (campaign?.currentAmount / campaign?.goalAmount).toFixed(
+                      2
+                    ) * 100
+                  }
                 />
               </Card>
             ))}

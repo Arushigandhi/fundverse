@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to our DBMS lab mini project." });
 });
 app.use("/api/campaign", require("./routes/campaign.route"));
+app.use("/api/user", require("./routes/user.route"));
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
