@@ -19,12 +19,9 @@ export default function discover() {
             <Image src="/logo.png" alt="logo" width={120} height={40} />
           </Link>
         </div>
-        <p>
-          Welcome to the world of giving!{" "}
-          {/* <span>
-            <Link href={"/register"}>Sign Up</Link>
-          </span> */}
-        </p>
+        <Link href="/profile">
+          <p>Go to your profile! </p>
+        </Link>
       </Row>
       <Row>
         <Col className={Styles.topContainer}>

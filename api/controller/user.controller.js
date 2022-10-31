@@ -26,4 +26,19 @@ controller.getUser = (req, res) => {
   });
 };
 
+controller.updateUser = (req, res) => {
+  const { uid } = req.params;
+  const data = req.body;
+  console.log("data isssss", data);
+  req.getConnection((err, conn) => {
+    conn.query("UPDATE user set ? WHERE id = ?", [data, uid], (err, user) => {
+      if (err) {
+        console.log(err);
+        res.json(err);
+      }
+      res.json(user);
+    });
+  });
+};
+
 module.exports = controller;

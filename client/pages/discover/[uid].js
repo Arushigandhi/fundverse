@@ -29,7 +29,6 @@ import { HeartTwoTone, TagOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { useAuth } from "context/AuthUserContext";
 import { useRouter } from "next/router";
-import { getUser } from "services/user.service";
 
 const { TextArea } = Input;
 
@@ -62,10 +61,6 @@ export default function campaignPage({ uid }) {
 
   const { authUser, loading, signOut } = useAuth();
   console.log(authUser);
-
-  // const { data: user } = useQuery("user", () => getUser(authUser.uid), {
-  //   enabled: !!authUser,
-  // });
 
   const router = useRouter();
 
@@ -134,12 +129,9 @@ export default function campaignPage({ uid }) {
                   />
                 </Link>
               </div>
-              <p>
-                Welcome to the world of giving!{" "}
-                {/* <span>
-            <Link href={"/register"}>Sign Up</Link>
-          </span> */}
-              </p>
+              <Link href="/profile">
+                <p>Go to your profile! </p>
+              </Link>
             </Row>
             <Col className={Styles.infoContainer}>
               <h1>{campaign[0]?.name}</h1>

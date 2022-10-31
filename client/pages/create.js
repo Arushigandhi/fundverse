@@ -61,6 +61,14 @@ export default function createFund() {
       </Col>
       <Col span={16} className={Styles.rightContainer}>
         <Form layout="vertical" onFinish={onFinish}>
+          <Form.Item name="image" label="Please provide an image.">
+            <button
+              className={Styles.uploadButton}
+              onClick={() => setShow(true)}
+            >
+              Upload
+            </button>
+          </Form.Item>
           <Form.Item
             name="maintainerName"
             label="Who will be the campaign's maintainer?"
@@ -82,14 +90,7 @@ export default function createFund() {
           <Form.Item name="description" label="Describe your campaign.">
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item name="image" label="Please provide an image.">
-            <button
-              className={Styles.uploadButton}
-              onClick={() => setShow(true)}
-            >
-              Upload
-            </button>
-          </Form.Item>
+
           <Form.Item
             name="goalAmount"
             label="How much would you like to raise?"

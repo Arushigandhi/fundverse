@@ -6,6 +6,7 @@ import Styles from "../styles/pages/Login.module.scss";
 import Link from "next/link";
 import { useMutation } from "react-query";
 import { createUser } from "services/user.service";
+import { Router, useRouter } from "next/router";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +14,14 @@ const SignUp = () => {
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
 
+  const router = useRouter();
+
   const { createUserWithEmailAndPassword } = useAuth();
 
   const finishMutation = useMutation(createUser, {
     onSuccess: (data) => {
       message.success("User created successfully");
+      router.push("/login");
     },
     onError: (error) => {
       message.error(error.message);
@@ -28,7 +32,6 @@ const SignUp = () => {
     if (passwordOne === passwordTwo)
       createUserWithEmailAndPassword(email, passwordOne)
         .then(async (authUser) => {
-          console.log("authUser", authUser);
           console.log("Success. The user is created in firebase");
           const data = {
             id: authUser.user.uid,
