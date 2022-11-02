@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <>
       <Col className={Styles.navContainer}>
-        <Input.Search placeholder="Search" />
+        <Input.Search placeholder="Search" style={{ opacity: "0" }} />
         <div className={Styles.img}>
           <Link href="/">
             <Image src="/logo.png" alt="logo" width={120} height={40} />
