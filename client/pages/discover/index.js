@@ -9,7 +9,12 @@ import Styles from "../../styles/pages/Discover.module.scss";
 export default function discover() {
   const allCampaigns = useQuery("allCampaigns", getAllCampaigns);
   const allCategories = useQuery("allCategories", getAllCategories);
-  console.log("allca", allCategories);
+  console.log("allca", allCampaigns);
+
+  const filteredCampaigns = allCampaigns.data?.filter((campaign) => {
+    return campaign.featured === 1;
+  });
+  console.log("filteredCampaigns", filteredCampaigns);
 
   return (
     <Col className={Styles.controller}>
@@ -44,8 +49,8 @@ export default function discover() {
       <Row className={Styles.bottomContainer}>
         <h1 className={Styles.heading}>Fundraisers to Explore</h1>
         <Row className={Styles.cardController}>
-          {allCampaigns &&
-            allCampaigns?.data?.map((campaign, idx) => (
+          {filteredCampaigns &&
+            filteredCampaigns?.map((campaign, idx) => (
               <Card
                 hoverable
                 key={idx}

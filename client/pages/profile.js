@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <p>
               <span>
-                <Link href={"/register"}>Go to Discover</Link>
+                <Link href={"/discover"}>Go to Discover</Link>
               </span>
             </p>
           </Row>

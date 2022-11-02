@@ -9,5 +9,6 @@ router.get("/get-all-donations/:uid", campaignController.getAllDonations);
 router.post("/add-comment", campaignController.addComment);
 router.get("/get-all-comments/:uid", campaignController.getAllComments);
 router.get("/get-all-categories", campaignController.getAllCategories);
+router.get("/get-remaining/:uid", campaignController.getRemainingAmount);
 
 module.exports = router;

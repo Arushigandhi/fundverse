@@ -42,3 +42,8 @@ export const getAllCategories = async () => {
   const res = await axios.get(API_URL + "/get-all-categories");
   return res.data;
 };
+
+export const getRemainingAmount = async (uid) => {
+  const res = await axios.get(API_URL + "/get-remaining/" + uid);
+  return res.data;
+};

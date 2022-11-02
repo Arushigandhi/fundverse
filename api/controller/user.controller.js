@@ -15,7 +15,6 @@ controller.createUser = (req, res) => {
 
 controller.getUser = (req, res) => {
   const { uid } = req.params;
-  console.log("uid isssss", uid);
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM user WHERE id = ?", [uid], (err, user) => {
       if (err) {
@@ -29,7 +28,6 @@ controller.getUser = (req, res) => {
 controller.updateUser = (req, res) => {
   const { uid } = req.params;
   const data = req.body;
-  console.log("data isssss", data);
   req.getConnection((err, conn) => {
     conn.query("UPDATE user set ? WHERE id = ?", [data, uid], (err, user) => {
       if (err) {

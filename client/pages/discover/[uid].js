@@ -5,6 +5,7 @@ import {
   createDonation,
   getAllComments,
   getAllDonations,
+  getRemainingAmount,
   getSpecCampaign,
 } from "services/campaign.service";
 import {
@@ -40,6 +41,8 @@ export default function campaignPage({ uid }) {
 
   const { data: donations } = useQuery("donations", () => getAllDonations(uid));
 
+  const { data: rem } = useQuery("rem", () => getRemainingAmount(uid));
+
   const { data: comments } = useQuery("comments", () => getAllComments(uid));
   console.log(comments);
 
@@ -48,6 +51,8 @@ export default function campaignPage({ uid }) {
 
   const showModal = () => {
     setIsModalOpen(true);
+    const val = Object.values(rem[0]);
+    message.success(`Amount left to raise: ${val[0]}`);
   };
 
   const handleOk = () => {
@@ -60,7 +65,6 @@ export default function campaignPage({ uid }) {
   };
 
   const { authUser, loading, signOut } = useAuth();
-  console.log(authUser);
 
   const router = useRouter();
 
@@ -189,7 +193,11 @@ export default function campaignPage({ uid }) {
                         author={<a>{comment.name}</a>}
                         avatar={
                           <Avatar
-                            src="https://joeschmoe.io/api/v1/random"
+                            src={
+                              comment.image
+                                ? comment.image
+                                : "https://joeschmoe.io/api/v1/random"
+                            }
                             alt="Platform User"
                           />
                         }

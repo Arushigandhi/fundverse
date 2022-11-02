@@ -11,6 +11,22 @@ controller.list = (req, res) => {
   });
 };
 
+controller.getRemainingAmount = (req, res) => {
+  const { uid } = req.params;
+  req.getConnection((err, conn) => {
+    conn.query(
+      // CALL FUNCTION
+      `select func(${uid})`,
+      (err, campaign) => {
+        if (err) {
+          res.json(err);
+        }
+        res.send(campaign);
+      }
+    );
+  });
+};
+
 controller.getById = (req, res) => {
   const { uid } = req.params;
   req.getConnection((err, conn) => {
